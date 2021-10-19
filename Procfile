@@ -1,0 +1,1 @@
+web gunicorn Laptops.wsgi:application --log-file -
