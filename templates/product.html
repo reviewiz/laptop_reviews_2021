@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <style>
+      body{
+      background: url("https://getsolution.com/wp-content/uploads/2020/11/RISK-ANALYSIS.jpg.webp");
+        }
+      .Heading{
+        font-family: "Ubuntu Condensed";
+        margin: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+        width:97%;
+        }
+      nav{
+        margin: auto;
+        font-family: "Ubuntu Condensed", cursive;
+        width: 97%;   
+        }
+      .page_heading{
+        text-align:center; 
+        color: white;
+        }
+      .main_div{
+        margin: auto;
+        background-color: rgba(255,255,255, 0.980);
+        width: 97%;
+        font-family: "Ubuntu Condensed", cursive;
+        border-radius: 4px;
+        box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
+        padding-bottom:10rem;
+        }
+      .Product_image{
+          height: 225px;
+          width: 340px;
+      }
+      .image_holder{
+        float:left;
+        text-align: left;
+        width:40%;
+        }
+      .name_holder{
+        margin:auto;
+        text-align: left;
+        width:90%;
+        }
+      .rat_chart{
+        margin:auto;
+        width:50%;
+      }
+      .tone_chart{
+        margin:auto;
+      }
+      .analysis{
+        margin:auto;
+        width:97%;
+        text-align:center;
+      }
+    @media all and (max-width: 770px){
+      .Product_image{
+          height: 280px;
+          width: 340px;
+        }
+      .main_div{
+        margin: auto;
+        background-color: rgba(255,255,255, 0.980);
+        width: 97%;
+        font-family: "Ubuntu Condensed", cursive;
+        border-radius: 4px;
+        box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
+        padding-bottom:0.1rem;
+        }
+        .image_holder{
+          overflow: hidden;
+          text-align: center;
+          margin: auto;
+          width:100%;
+        }
+        .name_holder{
+        margin:auto;
+        width:100%;
+        text-align:center;
+        }
+      .rat_chart{
+        margin:auto;
+      }
+      .tone_chart{
+        margin:auto;
+      }
+      .analysis{
+        margin:auto;
+        width:97%;
+        text-align:center;
+      }
+    }
+    @media all and (max-width: 400px){
+        .Heading{
+            font-family: "Ubuntu Condensed", cursive;
+            margin-left: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            width:100%;
+        }
+        nav{
+            margin-left: auto;
+            font-family: "Ubuntu Condensed", cursive;
+            width: 97%;   
+        }
+        .main_div{
+            margin:auto;
+            background-color: rgba(255,255,255, 0.980);
+            width: 95%;
+            font-family: "Ubuntu Condensed", cursive;
+            border-radius: 4px;
+            box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
+        }
+        .Product_image{
+          height: 200px;
+          width: 320px;
+        }
+        .image_holder{
+          text-align: center;
+          margin: auto;
+          width:95%;
+        }
+      .name_holder{
+        margin:auto;
+        width:100%;
+        text-align:center;
+        }
+      .rat_chart{
+        margin:auto;
+        padding-bottom:5px;
+      }
+      .tone_chart{
+        margin:auto;
+      }
+      .analysis{
+        margin:auto;
+        width:97%;
+        text-align:center;
+      }
+    }
+    }
+    </style>
+    <title> Laptop Reveiws </title>
+  </head>
+  <body>
+    <div class="Heading">
+      <a href="https://laptops2021.herokuapp.com/"><h1 class="page_heading">Review Analysis</h1></a>
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+      <a class="navbar-brand" href="https://laptops2021.herokuapp.com/">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://laptops2021.herokuapp.com/search">Advanced Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Contact us</a>
+        </li>    
+      </ul>
+      </div>  
+    </nav>
+    <div class="main_div">
+    <br>
+        <div class="image_holder">
+          <img class="Product_image" src="{{data.Images}}" alt="Laptop"></img>    
+        </div>
+        <div class="name_holder">
+          <a href="{{data.Link}}" style="color: black"> <h4 class="details_holder">{{data.Product_name}}</h4></a>
+          <span> <h5 class="details_holder">Price:{{data.Price}}</h5></span>
+          <span><h5 class="details_holder">Rating: {{data.Rating}} out of 5</h5></span>
+          <span><h5>Number of Reveiws: {{data.number_of_reviews}}</h5></span>
+          <span><h5>Average Rating : {{data.Avg_rev_rating}}</h5></span>
+        </div>
+        <div class="analysis">  
+          {% if data.Avg_rev_rating == 0.0 %}
+          <a href="{{data.Review_link}}"><button>well no one is perfect get over it!</button></a>
+          {% else %}
+            <span class="rat_chart">
+              <canvas id="ratings"></canvas>
+              <h6>Number of votes for each star</h6>
+            </span>
+            <span class="tone_chart">
+              <canvas id="tone"></canvas>
+              <h6>Tone of the reviews</h6>
+            </span>
+            <a href="{{data.Review_link}}"><button>Well The dev ran out of coffee so wait while he gets this page up!</button></a>
+          {% endif %}
+        </div>
+    </div>
+    <br>
+    <div><a href="https://mail.google.com/mail/?view=cm&fs=1&to=dibyasadhukhan%40gmail.com&authuser=0"><P style="text-align:right; color:white;">dibyasadhukhan@gmail.com</P></a></div>
+  <script>
+    var rev_list={{data.rev_rat_dist}}
+    const ctx = document.getElementById('ratings').getContext('2d');
+    const ratings = new Chart(ctx, {
+      type: 'bar',
+      data: {
+      labels: ['5 stars', '4 stars', '3 stars', '2 stars', '1 star'],
+      datasets: [{
+      label: 'Ratings',
+      data: rev_list,
+      backgroundColor: [
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+      ],
+      borderColor: [
+        'rgba(0, 0, 0, .4)',
+        'rgba(0, 0, 0, .4)',
+        'rgba(0, 0, 0, .4)',
+        'rgba(0, 0, 0, .4)',
+        'rgba(0, 0, 0, .4)',
+      ],
+      borderWidth: 1
+      }]
+      },
+    options: {
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      scales: {
+        
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+    });
+    var tone_list={{data.rev_tone_dist}}
+    var ctx_2 = document.getElementById("tone").getContext('2d');
+            var data_2 = {
+                datasets: [{
+                    data: tone_list,
+                    backgroundColor: [
+                        '#3c8dbc',
+                        '#f56954',
+                        '#f39c12',
+                    ],
+                }],
+                labels: [
+                    'Neutral',
+                    'Good',
+                    'Bad'
+                ]
+            };
+            var myDoughnutChart_2 = new Chart(ctx_2, {
+                type: 'doughnut',
+                data: data_2,
+                options: {
+                    maintainAspectRatio: false,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            boxWidth: 12
+                        }
+                    }
+                }
+            });
+
+  </script>
+  </body>
+  </html>

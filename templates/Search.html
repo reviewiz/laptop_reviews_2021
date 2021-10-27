@@ -3,45 +3,43 @@
 <title>Advanced Search</title>
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta charset="utf-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
   body{
     background: url("https://getsolution.com/wp-content/uploads/2020/11/RISK-ANALYSIS.jpg.webp");
   }
   .Heading{
-    font-family: cursive, sans-serif;
+    font-family: "Ubuntu Condensed";
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    width:99%;
+    background-color: rgba(0, 0, 0, 0.9);
+    width:97%;
+    padding-bottom:1px;
   }
   nav{
     margin: auto;
-    font-family: cursive, sans-serif;
+    font-family: "Ubuntu Condensed";
     width: 97%;   
   }
   .page_heading{
     text-align:center; 
     color: white;
   }
-  .Form_holder{
-    font-family: cursive, sans-serif;
-    background-color: rgba(255, 255, 255, 0.600);
-    /*padding: 20px;*/
-  }
+
   .form_labels{
+    margin: auto;
     color: white;
     background-color: rgba(0, 0, 0, 0.800);
+    width: 97%;
   }
   .main_div{
     margin: auto;
     background-color: rgba(255,255,255, 0.750);
-    width: 95%;
-    font-family: cursive, sans-serif;
+    width: 97%;
+    font-family: "Ubuntu Condensed";
     border-radius: 4px;
     box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
   }
@@ -88,28 +86,28 @@
     .name_holder{
       margin:auto;
       text-align: left;
-      padding-top:13rem;
+      padding-top:17.5rem;
       width:100%;
       text-align:center;
     }
   }
   @media all and (max-width: 400px){
     .Heading{
-      font-family: cursive, sans-serif;
+      font-family: "Ubuntu Condensed";
       margin-left: auto;
-      background-color: rgba(0, 0, 0, 0.7);
-      width:100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      width:97%;
     }
     nav{
       margin-left: auto;
-      font-family: cursive, sans-serif;
+      font-family: "Ubuntu Condensed";
       width: 97%;   
     }
     .main_div{
       margin:auto;
       background-color: rgba(255,255,255, 0.750);
-      width: 95%;
-      font-family: cursive, sans-serif;
+      width: 97%;
+      font-family: "Ubuntu Condensed";
       border-radius: 4px;
       box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
     }
@@ -130,6 +128,7 @@
       width:95%;
     }
     .name_holder{
+      padding-top:10.5rem;
       margin:auto;
       width:100%;
       text-align:center;
@@ -138,11 +137,9 @@
 </style>
 </head>
 <body >
-    <div class="Heading">
-      <h1 class="page_heading">LAPTOP REVIEWS</h1>
+    <div class="Heading" id ="search_form">
+      <a href="https://laptops2021.herokuapp.com/"><h1 class="page_heading">LAPTOP REVIEWS</h1></a>
     </div>
-    <div id="search_form"></div>
-    <!---Nav bar block -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
       <a class="navbar-brand" href="https://laptops2021.herokuapp.com/">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -199,8 +196,6 @@
     </center>
     <br>
     </div>
-    <br>
-  
   <div class="main_div">
         <center>
           <br>
@@ -208,8 +203,7 @@
         </center>
         {% for i in data%}
         <br>
-        <div class="product_details"> 
-          <br>
+        <div class="product_details"><a href="./Product/?code={{i.Product_code}}" style="color: black"> 
           <div class="image_holder">
             <img class="Product_image" src="{{i.Images}}" alt="Laptop"></img>    
           </div>
@@ -221,7 +215,7 @@
             <br>
           </div>
           <br> 
-        </div>
+        </a></div>
         {% endfor %}
         <br>
         {% if data%}
@@ -231,7 +225,7 @@
         <div class="product_details"> 
           <br>
           <div class="image_holder">
-            <img class="Product_image" src="https://lh3.googleusercontent.com/proxy/Z3s0Fq63KBC2TqebTu61ijRgYbbKJGTRycG9lyyrA5A7HYuSWtf6AMq4oq4zq2gRGudwjHAC-Nbo2ye5Z0y9_1qSo2qWdlO3jwMHwZ7JGV9T0D1zuSfO29sU6sd4fsu3ZKO-OY6o_NvXeg" alt="Priceless Laptop!"></img>    
+            <img class="Product_image" src="https://wikiclipart.com/wp-content/uploads/2017/01/Laptop-clipart-pictures-free-images-4.jpg" alt="Priceless Laptop!"></img>    
           </div>
           <br>
           <div class="name_holder">
