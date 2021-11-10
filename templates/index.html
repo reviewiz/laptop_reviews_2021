@@ -1,186 +1,113 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Condensed" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <style>
-      body{
-      background: url("https://getsolution.com/wp-content/uploads/2020/11/RISK-ANALYSIS.jpg.webp");
-        }
-      .Heading{
-        font-family: "Ubuntu Condensed";
-        margin: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        width:97%;
-        padding-bottom:1px;
-      }
-      nav{
-        margin: auto;
-        font-family: "Ubuntu Condensed";
-        width: 97%;   
-        }
-      .page_heading{
-        text-align:center; 
-        color: white;
-        }
-      .main_div{
-        margin: auto;
-        background-color: rgba(255,255,255, 0.750);
-        width: 97%;
-        font-family: "Ubuntu Condensed";
-        border-radius: 4px;
-        box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
-        }
-      .product_details{
-        margin: auto;
-        width:90%;
-        background-color: rgba(255, 255, 255, 0.650);
-        padding: 20px;
-        border-radius: 4px;
-        box-shadow: 1px 1px 5px 7px rgba(0, 0, 0, 0.650);
-        }
-      .Product_image{
-          height: 175px;
-          width: 230px;
-      }
-      .image_holder{
-        float:left;
-        text-align: left;
-        width:40%;
-        }
-      .name_holder{
-        margin:auto;
-        text-align: left;
-        width:90%;
-        text-align:left;
-        }
-    @media all and (max-width: 730px){
-      .Product_image{
-          height: 280px;
-          width: 340px;
-        }
-        .product_details{
-          margin: auto;
-          width:95%;
-          background-color: rgba(255, 255, 255, 0.650);
-          border-radius: 4px;
-          box-shadow: 1px 1px 5px 7px rgba(0, 0, 0, 0.650);
-        }
-        .image_holder{
-          text-align: center;
-          margin: auto;
-          width:100%;
-        }
-        .name_holder{
-        margin:auto;
-        text-align: left;
-        padding-top:13rem;
-        width:100%;
-        text-align:center;
-        }
-    }
-    @media all and (max-width: 400px){
-        .Heading{
-            font-family: "Ubuntu Condensed";
-            margin-left: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-            width:97%;
-        }
-        nav{
-            margin-left: auto;
-            font-family: "Ubuntu Condensed";
-            width: 97%;   
-        }
-        .main_div{
-            margin:auto;
-            background-color: rgba(255,255,255, 0.750);
-            width: 97%;
-            font-family: "Ubuntu Condensed";
-            border-radius: 4px;
-            box-shadow: 2px 2px 20px 23px rgba(0, 0, 0, 0.650);
-        }
-        .product_details{
-          margin: auto;
-          width:95%;
-          background-color: rgba(255, 255, 255, 0.650);
-          border-radius: 4px;
-          box-shadow: 1px 1px 5px 7px rgba(0, 0, 0, 0.650);
-        }
-        .Product_image{
-          height: 180px;
-          width: 240px;
-        }
-        .image_holder{
-          text-align: center;
-          margin: auto;
-          width:95%;
-        }
-      .name_holder{
-        margin:auto;
-        width:100%;
-        text-align:center;
-        }
-    }
-    </style>
-    <title> Laptop Reveiws </title>
-  </head>
-  <body>
-    <div class="Heading">
-      <a href="https://laptops2021.herokuapp.com/"><h1 class="page_heading">LAPTOP REVIEWS</h1></a>
-     </div>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-      <a class="navbar-brand" href="https://laptops2021.herokuapp.com/">Home</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="https://laptops2021.herokuapp.com/search">Advanced Search</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="">Contact us</a>
-        </li>    
-      </ul>
-      </div>  
-    </nav>
-    <div class="main_div">
-        <center>
-          <br>
-          <h2>Our Recommended Products</h2>
-        </center>
-        {% for i in data%}
-        <br>
-        <div class="product_details"><a href="./Product/?code={{i.Product_code}}" style="color: black"> 
-          <br>
-          <div class="image_holder">
-            <img class="Product_image" src="{{i.Images}}" alt="Laptop"></img>    
-          </div>
-          <br>
-          <div class="name_holder">
-            <h4 class="details_holder">{{i.Product_name|truncatechars:33}}</h4>
-            <span> <h5 class="details_holder">Price : &#8377; {{i.Price}}</h5></span>
-            <span><h5 class="details_holder">Rating :{{i.Rating}} out of 5 ({{i.number_of_reveiws}})</h5></span>
-            <br>
-          </div>
-          <br> 
-        </a></div>
-        {% empty %}
-        <div class="product_details"><h3>I guess the developer is busy finding his second brain cell</h3><br></div>
-        {% endfor %}
-        <br>
-        <a href="./search">
-        {% if data%}
-        <div class="product_details"><h3>Psst! Find your favourite laptop with Advanced Search!</h3><br></div><br></a>
-        {% else %}
-        <div class="product_details"><h3>Please try advance search!</h3><br></div></a>
-        {% endif %}
+{% extends 'base.html' %}
+<!-- page title-->
+{% block title %}
+  Laptop Reviews
+{% endblock %}
+{% block page_heading%}
+  Laptop Reveiws
+  <!--Page heading-->
+{% endblock %}
+{% block content %}
+<div class="main_div">
+  <br>
+  <h2 class="message">Top Products</h1>
+  {% for i in data%}
+  <br>
+  <div class="product-container"> 
+    <div class="image_holder">
+    <a href="./Product/?code={{i.Product_code}}" style="color: black">
+      <img class="Product_image" src="{{i.Images}}" alt="Laptop"></img>
+    </a>
+    </div>
+    <div class="details_holder">
+    <a class="product_link" href="./Product/?code={{i.Product_code}}">
+      <span class="details"><h4>{{i.Product_name|truncatechars:33}}</h4></span>
+      <br>
+      <span class="details"><h5>Price : &#8377; {{i.Price}}</h5></span>
+      <br>
+      <span class="details"><h5>Rating :{{i.Rating}} out of 5 ({{i.number_of_reveiws}})</h5></span>
+    </a>
+    </div>
+  </div>
+  {% empty %}
+    <div class="product-container"><h3>Well this is  disappointing isn't it?</h3><br></div>
+  {% endfor %}
+  <a class="product_link" href="./search">
+    {% if data%}
+      <br>
+      <div class="product-container">
+        <h3>Psst! Find your favourite laptop with Advanced Search!</h3><br>
       </div>
-      <div><a href="https://mail.google.com/mail/?view=cm&fs=1&to=dibyasadhukhan%40gmail.com&authuser=0"><P style="text-align:right; color:white;">dibyasadhukhan@gmail.com</P></a></div>
-  </body>
-</html>
+      <br>
+      </a>
+    {% else %}
+    <br>
+    <a class="product_link" href="./search">
+      <div class="product-container"><h3>Please try advance search!</h3><br></div></a>
+    </a>
+    <br>
+    {% endif %}
+</div>
+{% endblock %}
+{% block style %}
+<style>
+  @media (prefers-color-scheme: light) {
+    .main_div{
+      display:flex;
+      flex-direction:column;
+      color:black;
+      justify-content:center;
+      background-color: #eeeeee9e;
+    }
+    .product-container {
+      display: flex;
+      background-color: #e1e1e1de;
+      justify-content:center;
+      margin:auto;
+      width:90%;
+    }
+    
+  }
+        /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .main_div{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      color:white;
+      background-color: #3333339e;
+    }
+    .product-container {
+      display: flex;
+      background-color: #4c4c4c9e;
+      justify-content:center;
+      margin:auto;
+      width:90%;
+    }
+  }
+  .message{
+    text-align: center;
+  }
+  .image_holder {
+    color: white;
+    width: 30%;
+    margin: auto;
+  }
+  .details_holder {
+    padding-left:10%;
+    width: 60%;
+    margin: auto;
+    text-align: left;
+  }
+  .Product_image{
+      height: 280px;
+      width: 340px;
+  }
+  @media all and (max-width: 730px){
+    .Product_image{
+      height: 280px;
+      width: 340px;
+    }
+  }
+</style>
+{% endblock %}
