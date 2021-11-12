@@ -30,7 +30,7 @@ def index(request):
     del data
     return render(request, 'index.html',context)
 def search(request):
-    data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Products.csv')
+    data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Advanced_search.csv')
     data=data.drop(data.columns[0], axis=1)
     Brand_list=list(data['Brand'].value_counts().index)
     screen_list=list(data['Screen_size'].value_counts().index)
