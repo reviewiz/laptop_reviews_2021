@@ -32,35 +32,13 @@ def index(request):
 def search(request):
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Products.csv')
     data=data.drop(data.columns[0], axis=1)
-    drop_down=list(data['Brand'].value_counts().index)
-    all_data=[]
-    message=""
-    try:
-        lb=int(request.POST['Price_range'].split(',')[0])
-        ub=int(request.POST['Price_range'].split(',')[1])
-        brand=request.POST['Brand']
-        sort=request.POST['sort']
-        table=get_advanced_df(data,brand,ub,lb,sort)
-        del data
-        if brand=='Any' and sort=='number_of_reveiws' and lb==0 and ub==0:
-            message="Top 5 most reveiwed laptops"
-        
-        if table.shape[0]!=0:
-            if table.shape[0]==1:
-                message="We found "+str(table.shape[0])+" Laptop"
-            else:
-                message="We found "+str(table.shape[0])+" Laptops"
-        else:
-            message="Believe me! I looked everywhere and all I found was this. :( "
-    except:
-        table=data.nlargest(5, ['number_of_reveiws'])
-        message="Top 5 most reveiwed products"
-    for i in range(table.shape[0]):
-        all_data.append(dict(table.iloc[i]))
-        
-    context={'select':drop_down,'data':all_data,'query':message}
+    Brand_list=list(data['Brand'].value_counts().index)
+    screen_list=list(data['Screen_size'].value_counts().index)
+    RAM_list=list(data['RAM'].value_counts().index)
+    Processor_list=list(data['Processor'].value_counts().index)
+    HD_list=list(data['Hard_drive'].value_counts().index)
+    context={'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':'yo'}
     #return render(request, 'index.html',context)
-    del table
     return render(request, 'Search.html',context) 
 def product(request):
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Master_df.csv')
