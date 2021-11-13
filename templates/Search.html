@@ -65,6 +65,16 @@
           <br>
         {%endfor%}
         </div>
+        <label for="Processor">Screen Size:</label>
+        <div class="Checkbox_list">
+        {% for i in screen%}
+          <input class="form-check-input" type="checkbox" name="Processor" value={{i}} id="{{i}}">
+          <label class="form-check-label" for="{{i}}">
+            {{i}}
+          </label>
+          <br>
+        {%endfor%}
+        </div>
         <br>      
       <br>
       </form>
