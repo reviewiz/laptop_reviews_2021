@@ -48,10 +48,17 @@
         <label for="RAM">RAM:</label>
         <div class="Checkbox_list">
         {% for i in RAM%}
+          {% if i==-1 %}
+          <input class="form-check-input" type="checkbox" name="RAM" value="all" id="{{i}}_RAM">
+          <label class="form-check-label" for="{{i}}_RAM">
+            All
+          </label>
+          {% else %}
           <input class="form-check-input" type="checkbox" name="RAM" value={{i}} id="{{i}}_RAM">
           <label class="form-check-label" for="{{i}}_RAM">
             {{i}} GB
           </label>
+          {% endif %}
           <br>
         {%endfor%}
         </div>
