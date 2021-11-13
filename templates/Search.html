@@ -68,7 +68,17 @@
         <label for="Processor">Screen Size:</label>
         <div class="Checkbox_list">
         {% for i in screen%}
-          <input class="form-check-input" type="checkbox" name="Processor" value={{i}} id="{{i}}">
+          <input class="form-check-input" type="checkbox" name="screen" value={{i}} id="{{i}}">
+          <label class="form-check-label" for="{{i}}">
+            {{i}}
+          </label>
+          <br>
+        {%endfor%}
+        </div>
+        <label for="Processor">Hard Disk Type:</label>
+        <div class="Checkbox_list">
+        {% for i in screen%}
+          <input class="form-check-input" type="checkbox" name="Hard_disk" value={{i}} id="{{i}}">
           <label class="form-check-label" for="{{i}}">
             {{i}}
           </label>
