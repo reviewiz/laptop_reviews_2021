@@ -1,24 +1,8 @@
 from django.shortcuts import render
 import pandas as pd
 # Create your views here.
-def get_advanced_df(data,brand,ub,lb,sort):
-    table = pd.DataFrame(columns = data.columns)
-    if ub==-1:
-        table=data.loc[data['Price']>100000]
-    elif lb>0 and ub>0:
-        table=data.loc[(data['Price']>lb)&(data['Price']<=ub)]
-    else:
-        table=data
-    
-    if brand!='Any':
-        table=table.loc[table['Brand']==brand]
-    if sort=='Price_A':
-        table=table.nsmallest(len(table),['Price'])
-    elif sort=='Price_D':
-        table=table.nlargest(len(table),['Price'])
-    else:
-        table=table.nlargest(len(table),[sort])
-    return table
+#def get_advanced_df(data,brand,ub,lb,sort):   
+    #return table
 def index(request):
     all_data=[]
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Top_products.csv')
@@ -38,7 +22,6 @@ def search(request):
     Processor_list=list(data['Processor'].value_counts().index)
     HD_list=list(data['Hard_drive'].value_counts().index)
     context={'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':'yo'}
-    
     try:
         print(request.POST)
     except:

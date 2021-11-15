@@ -25,13 +25,11 @@
         <label for="price range">Price Range:</label>
           <select name="Price_range" id="Price_range">
           <option value="0,0">Any</option>
-          <option value="1,19999">&#60; 20000</option>
-          <option value="20000,34999">20000 - 35000</option>
-          <option value="35000,44999">35000- 45000</option>
-          <option value="45000,64999">45000-65000</option>
-          <option value="65000,84999">65000-85000</option>
-          <option value="85000,9999">85000-100000</option>
-          <option value="100000,-1">&#62; 100000</option>
+          <option value="1,29999">&#60; 30000</option>
+          <option value="30000,39999">30000- 40000</option>
+          <option value="40000,59999">40000-50000</option>
+          <option value="60000,79999">60000-80000</option>
+          <option value="80000,-1"> &#62; 80000</option>
         </select>
         <br>
         <br>
@@ -40,7 +38,6 @@
           <option value="Any">Any</option>
           {% for i in Brand%}
             <option value="{{i}}">{{i}}</option>
-
           {%endfor%}
         </select>
         <button class ="Search" type = "submit">Search</button>
@@ -48,14 +45,10 @@
         <br>
         <label for="RAM">RAM:</label>
         <div class="Checkbox_list">
-          <input class="form-check-input" type="checkbox" name="RAM" value="all" id="{{i}}_RAM" checked>
-          <label class="form-check-label" for="{{i}}_RAM">
-            All
-          </label>
-          <br>
+          <input name="RAM" type="hidden" value="all"/>
           {% for i in RAM%}
             {% if i == -1 %}
-        
+
             {% else %}
             <input class="form-check-input" type="checkbox" name="RAM" value="{{i}}" id="{{i}}_RAM">
             <label class="form-check-label" for="{{i}}_RAM">
@@ -67,13 +60,9 @@
         </div>
         <label for="Processor">Processor:</label>
         <div class="Checkbox_list">
-          <input class="form-check-input" type="checkbox" name="Processor" value="all" id="all" checked>
-          <label class="form-check-label" for="all">
-            All
-          </label>
-          <br>
+          <input name="Processor" type="hidden" value="all"/>
           {% for i in Processor%}
-            <input class="form-check-input" type="checkbox" name="Processor" value={{i}} id="{{i}}">
+            <input class="form-check-input" type="checkbox" name="Processor" value="{{i}}" id="{{i}}">
             <label class="form-check-label" for="{{i}}">
               {{i}}
             </label>
@@ -81,13 +70,9 @@
           {%endfor%}
           <br>
         </div>
-        <label for="Processor">Screen Size:</label>
+        <label for="screen">Screen Size:</label>
         <div class="Checkbox_list">
-          <input class="form-check-input" type="checkbox" name="screen" value="all" id="all" checked>
-          <label class="form-check-label" for="all">
-            All
-          </label>
-          <br>
+          <input name="screen" type="hidden" value="all"/>
         {% for i in screen%}
           <input class="form-check-input" type="checkbox" name="screen" value={{i}} id="{{i}}">
           <label class="form-check-label" for="{{i}}">
@@ -95,19 +80,16 @@
           </label>
           <br>
         {%endfor%}
+        <br>
         </div>
-        <label for="Processor">Hard Disk Type:</label>
+        <label for="Hard_disk">Hard Disk Type:</label>
         <div class="Checkbox_list">
-          <input class="form-check-input" type="checkbox" name="Hard_disk" value="all" id="all" checked>
-          <label class="form-check-label" for="all">
-            All
-          </label>
-          <br>
+          <input name="Hard_disk" type="hidden" value="all"/>
           {% for i in Hard_disk%}
           {% if i == "Unknown" %}
-            <br>
+
           {% else %}
-            <input class="form-check-input" type="checkbox" name="Hard_disk" value={{i}} id="{{i}}">
+            <input class="form-check-input" type="checkbox" name="Hard_disk" value="{{i}}" id="{{i}}">
             <label class="form-check-label" for="{{i}}">
               {{i}}
             </label>
@@ -175,6 +157,26 @@
       justify-content:center;
       background-color: #eeeeee9e;
     }
+    .form_holder {
+      display:flex;
+      padding-left:2%;
+      flex-direction:column;
+      width: 27%;
+      background-color: #C3C3C3ee;
+    }
+    .search_display{
+      padding-left:.5%;
+      width:70%;
+      background-color: #e1e1e1de;
+    }
+    .product_details {
+      display:flex;
+      flex-direction:row;
+      background-color: #C3C3C3ee;
+      padding-top:2%;
+      padding-bottom:2%;
+      padding-left:2%;
+    }
   }
   /* Dark mode */
   @media (prefers-color-scheme: dark) {
@@ -185,21 +187,21 @@
       color:white;
       background-color: #3333339e;
     }
-  }
-  .form_holder {
+    .form_holder {
     display:flex;
     flex-direction:column;
     width: 25%;
-    background-color: #00ff00;
-  }
+    background-color: #4c4c4c9e;
+    }
   .search_display{
     padding-left:2%;
     width:70%;
-    background-color: #0000ff;
-  }
+    background-color: #4c4c4c9e;
+    }
   .product_details {
     display:flex;
     flex-direction:row;
+  }
   }
   .image_holder {
     color: white;
