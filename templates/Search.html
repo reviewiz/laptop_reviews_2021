@@ -45,35 +45,49 @@
         </select>
         <button class ="Search" type = "submit">Search</button>
         <br>
+        <br>
         <label for="RAM">RAM:</label>
         <div class="Checkbox_list">
-        {% for i in RAM%}
-          {% if i==-1 %}
-          <input class="form-check-input" type="checkbox" name="RAM" value="all" id="{{i}}_RAM">
+          <input class="form-check-input" type="checkbox" name="RAM" value="all" id="{{i}}_RAM" checked>
           <label class="form-check-label" for="{{i}}_RAM">
             All
           </label>
-          {% else %}
-          <input class="form-check-input" type="checkbox" name="RAM" value={{i}} id="{{i}}_RAM">
-          <label class="form-check-label" for="{{i}}_RAM">
-            {{i}} GB
-          </label>
-          {% endif %}
           <br>
-        {%endfor%}
+          {% for i in RAM%}
+            {% if i == -1 %}
+        
+            {% else %}
+            <input class="form-check-input" type="checkbox" name="RAM" value="{{i}}" id="{{i}}_RAM">
+            <label class="form-check-label" for="{{i}}_RAM">
+              {{i}} GB
+            </label>
+            {% endif %}
+            <br>
+          {%endfor%}
         </div>
         <label for="Processor">Processor:</label>
         <div class="Checkbox_list">
-        {% for i in Processor%}
-          <input class="form-check-input" type="checkbox" name="Processor" value={{i}} id="{{i}}">
-          <label class="form-check-label" for="{{i}}">
-            {{i}}
+          <input class="form-check-input" type="checkbox" name="Processor" value="all" id="all" checked>
+          <label class="form-check-label" for="all">
+            All
           </label>
           <br>
-        {%endfor%}
+          {% for i in Processor%}
+            <input class="form-check-input" type="checkbox" name="Processor" value={{i}} id="{{i}}">
+            <label class="form-check-label" for="{{i}}">
+              {{i}}
+            </label>
+            <br>
+          {%endfor%}
+          <br>
         </div>
         <label for="Processor">Screen Size:</label>
         <div class="Checkbox_list">
+          <input class="form-check-input" type="checkbox" name="screen" value="all" id="all" checked>
+          <label class="form-check-label" for="all">
+            All
+          </label>
+          <br>
         {% for i in screen%}
           <input class="form-check-input" type="checkbox" name="screen" value={{i}} id="{{i}}">
           <label class="form-check-label" for="{{i}}">
@@ -84,12 +98,21 @@
         </div>
         <label for="Processor">Hard Disk Type:</label>
         <div class="Checkbox_list">
-        {% for i in screen%}
-          <input class="form-check-input" type="checkbox" name="Hard_disk" value={{i}} id="{{i}}">
-          <label class="form-check-label" for="{{i}}">
-            {{i}}
+          <input class="form-check-input" type="checkbox" name="Hard_disk" value="all" id="all" checked>
+          <label class="form-check-label" for="all">
+            All
           </label>
           <br>
+          {% for i in Hard_disk%}
+          {% if i == "Unknown" %}
+            <br>
+          {% else %}
+            <input class="form-check-input" type="checkbox" name="Hard_disk" value={{i}} id="{{i}}">
+            <label class="form-check-label" for="{{i}}">
+              {{i}}
+            </label>
+          <br>
+          {% endif %}
         {%endfor%}
         </div>
         <br>      

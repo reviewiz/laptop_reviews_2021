@@ -38,6 +38,11 @@ def search(request):
     Processor_list=list(data['Processor'].value_counts().index)
     HD_list=list(data['Hard_drive'].value_counts().index)
     context={'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':'yo'}
+    
+    try:
+        print(request.POST)
+    except:
+        print('1')
     #return render(request, 'index.html',context)
     return render(request, 'Search.html',context) 
 def product(request):
