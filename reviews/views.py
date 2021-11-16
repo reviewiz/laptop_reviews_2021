@@ -1,8 +1,38 @@
 from django.shortcuts import render
 import pandas as pd
 # Create your views here.
-#def get_advanced_df(data,brand,ub,lb,sort):   
-    #return table
+def get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk):
+    table = pd.DataFrame(columns = data.columns)
+    if ub==-1:
+        table=data.loc[data['Price']>100000]
+    elif lb>0 and ub>0:
+        table=data.loc[(data['Price']>lb)&(data['Price']<=ub)]
+    else:
+        table=data
+    del data
+    if brand!='Any':
+        table=table.loc[table['Brand']==brand]
+    if sort=='Price_A':
+        table=table.nsmallest(len(table),['Price'])
+    elif sort=='Price_D':
+        table=table.nlargest(len(table),['Price'])
+    else:
+        table=table.nlargest(len(table),[sort])
+    print('yo32')
+    if len(RAM)>1:
+      RAM.remove('all')
+      table=table.loc[table['RAM'].isin(RAM)]
+    if len(Processor)>1:
+      Processor.remove('all')
+      table=table.loc[table['Processor'].isin(Processor)]
+    print('yo34')
+    if len(screen)>1:
+      screen.remove('all')
+      table=table.loc[table['Screen_size'].isin(screen)]
+    if len(Hard_disk)>1:
+      Hard_disk.remove('all')
+      table=table.loc[table['Hard_drive'].isin(Hard_disk)]
+    return table
 def index(request):
     all_data=[]
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Top_products.csv')
@@ -14,19 +44,46 @@ def index(request):
     del data
     return render(request, 'index.html',context)
 def search(request):
+    #sending data to website
+    all_data=[]
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Advanced_search.csv')
     data=data.drop(data.columns[0], axis=1)
+    data=data.rename(columns={'number of reveiws':'number_of_reveiws'})
     Brand_list=list(data['Brand'].value_counts().index)
     screen_list=list(data['Screen_size'].value_counts().index)
     RAM_list=list(data['RAM'].value_counts().index)
     Processor_list=list(data['Processor'].value_counts().index)
     HD_list=list(data['Hard_drive'].value_counts().index)
-    context={'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':'yo'}
+    #receiving data from website
+    #get_advanced_df(data,"Any",39999,1,"number of reveiws",Processor,RAM,screen,Hard_disk)
     try:
-        print(request.POST)
+        lb=int(request.POST['Price_range'].split(',')[0])
+        ub=int(request.POST['Price_range'].split(',')[1])
+        brand=request.POST['Brand']
+        sort=request.POST['sort']
+        Processor=request.POST['Processor']
+        RAM=request.POST['RAM']
+        screen=request.POST['screen']
+        Hard_disk=request.POST['Hard_disk']
+        table=get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk)
+        print('yo')
+        del data
+        if brand=='Any' and sort=='number_of_reveiws' and lb==0 and ub==0:
+            message="Top 5 most reveiwed laptops"
+        
+        if table.shape[0]!=0:
+            if table.shape[0]==1:
+                message="We found "+str(table.shape[0])+" Laptop"
+            else:
+                message="We found "+str(table.shape[0])+" Laptops"
+        else:
+            message="Believe me! I looked everywhere and all I found was this. :( "
     except:
-        print('1')
-    #return render(request, 'index.html',context)
+        table=data.nlargest(5, ['number_of_reveiws'])
+        message="Top 5 most reveiwed products"
+    for i in range(table.shape[0]):
+        all_data.append(dict(table.iloc[i]))
+    context={'data':all_data,'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':message}
     return render(request, 'Search.html',context) 
 def product(request):
     data = pd.read_csv('https://raw.githubusercontent.com/DibyaSadhukhan/Amazon_Review_Analysis/main/Data/Master_df.csv')
