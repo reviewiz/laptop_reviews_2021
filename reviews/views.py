@@ -18,14 +18,13 @@ def get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk):
         table=table.nlargest(len(table),['Price'])
     else:
         table=table.nlargest(len(table),[sort])
-    print('yo32')
     if len(RAM)>1:
       RAM.remove('all')
+      RAM=map(int,RAM)
       table=table.loc[table['RAM'].isin(RAM)]
     if len(Processor)>1:
       Processor.remove('all')
       table=table.loc[table['Processor'].isin(Processor)]
-    print('yo34')
     if len(screen)>1:
       screen.remove('all')
       table=table.loc[table['Screen_size'].isin(screen)]
@@ -61,12 +60,11 @@ def search(request):
         ub=int(request.POST['Price_range'].split(',')[1])
         brand=request.POST['Brand']
         sort=request.POST['sort']
-        Processor=request.POST['Processor']
-        RAM=request.POST['RAM']
-        screen=request.POST['screen']
-        Hard_disk=request.POST['Hard_disk']
+        Processor=dict(request.POST)['Processor']
+        RAM=dict(request.POST)['RAM']
+        screen=dict(request.POST)['screen']
+        Hard_disk=dict(request.POST)['Hard_disk']
         table=get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk)
-        print(request.POST)
         del data
         if brand=='Any' and sort=='number_of_reveiws' and lb==0 and ub==0:
             message="Top 5 most reveiwed laptops"
