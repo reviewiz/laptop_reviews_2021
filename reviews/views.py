@@ -66,7 +66,7 @@ def search(request):
         screen=request.POST['screen']
         Hard_disk=request.POST['Hard_disk']
         table=get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk)
-        print('yo')
+        print(request.POST)
         del data
         if brand=='Any' and sort=='number_of_reveiws' and lb==0 and ub==0:
             message="Top 5 most reveiwed laptops"
