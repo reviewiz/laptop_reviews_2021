@@ -113,7 +113,7 @@
           </div>
           <br>
           <div class="name_holder">
-            <a href="./Product/?code={{i.Product_code}}" style="color: black">
+            <a href="/Product/?code={{i.Product_code}}" style="color: black">
             <h4 class="details_holder">{{i.Product_name|truncatechars:33}}</h4></a>
             <span> <h5 class="details_holder">Price : &#8377; {{i.Price}}</h5></span>
             <span><h5 class="details_holder">Rating :{{i.Rating}} out of 5 ({{i.number_of_reveiws}})</h5></span>
@@ -221,6 +221,81 @@
     padding-left:10%;
     margin: auto;
     text-align: left;
+  }
+  @media all and (max-width: 885px){
+    .main_div{
+      flex-direction:column;
+    }
+    .Product_image{
+      height: 230px;
+      width: 280px;
+    }
+    .form_holder {
+      display:flex;
+      padding-left:5%;
+      flex-direction:column;
+      margin:auto;
+      width: 97%;
+    }
+    .search_display{
+      padding-left:.5%;
+      width:97%;
+      margin:auto;
+    }
+    .product_details {
+      width:95%;
+      margin:auto;
+    }
+    .name_holder {
+      padding-left:5%;
+    }
+  }
+  @media all and (max-width: 500px){
+    .Product_image{
+      height: 230px;
+      width: 280px;
+    }
+    .main_div{
+      flex-direction:column;
+    }
+    .Product_image{
+      height: 230px;
+      width: 280px;
+    }
+    .form_holder {
+      display:flex;
+      padding-left:5%;
+      flex-direction:column;
+      margin:auto;
+      width: 97%;
+    }
+    .search_display{
+      padding-left:.5%;
+      width:97%;
+      margin:auto;
+    }
+    .product_details {
+      flex-direction:column;
+      width:95%;
+      margin:auto;
+    }
+    .image_holder {
+      display:flex;
+      justify-content:center;
+      width:100%;
+      padding-top:5%;
+      padding-bottom:3%;
+    }
+    .name_holder {
+      padding-left:5%;
+      width:95%;
+    }
+  }
+  @media all and (max-width: 330px){
+    .Product_image{
+      height: 195px;
+      width: 235px;
+    }
   }
   </style>
 {% endblock %}

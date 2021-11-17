@@ -36,14 +36,14 @@
     {% if data%}
       <br>
       <div class="product-container">
-        <h3>Psst! Find your favourite laptop with Advanced Search!</h3><br>
+        <h4>Psst! Find your favourite laptop with Advanced Search!</h4><br>
       </div>
       <br>
       </a>
     {% else %}
     <br>
     <a class="product_link" href="./search">
-      <div class="product-container"><h3>Please try advance search!</h3><br></div></a>
+      <div class="product-container"><h4>Please try advance search!</h4><br></div></a>
     </a>
     <br>
     {% endif %}
@@ -89,6 +89,8 @@
     text-align: center;
   }
   .image_holder {
+    padding-top:2%;
+    padding-bottom:2%;
     color: white;
     width: 30%;
     margin: auto;
@@ -103,10 +105,42 @@
       height: 280px;
       width: 340px;
   }
-  @media all and (max-width: 730px){
+  @media all and (max-width: 885px){
     .Product_image{
-      height: 280px;
-      width: 340px;
+      height: 230px;
+      width: 280px;
+    }
+  }
+  @media all and (max-width: 500px){
+    .Product_image{
+      height: 230px;
+      width: 280px;
+    }
+    .product-container {
+      flex-direction:column;
+      justify-content:center;
+      
+    }
+    .image_holder {
+      display:flex;
+      justify-content:center;
+      width:100%;
+      padding-top:5%;
+      padding-bottom:3%;
+    }
+    .details_holder {
+      padding-left:5%;
+      padding-right:5%;
+      padding-top:5%;
+      width: 100%;
+      margin: auto;
+      text-align: left;
+    }
+  }
+  @media all and (max-width: 330px){
+    .Product_image{
+      height: 200px;
+      width: 240px;
     }
   }
 </style>
