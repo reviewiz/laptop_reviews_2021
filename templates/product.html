@@ -4,7 +4,7 @@
   {{data.Product_name}}
 {% endblock %}
 {% block page_heading%}
-  Reveiw Analysis
+  Review Analysis
   <!--Page heading-->
 {% endblock %}
 {% block link_scripts %}
@@ -14,14 +14,28 @@
   <div class="main_div">
     <br>
     <div class="image_holder">
-      <div>
+      <div class="image_div">
         <br>
         <img class="Product_image" src="{{data.Images}}" alt="Laptop"></img>
         <br>
       </div>
+    </div>
+    <div class="details_holder">
+      <div class="products_details">    
+          <a class="product_link" href="{{data.Link}}"><span><h4>{{data.Product_name}}</h4></span></a>
+          <br>
+          <span> <h5>Price:{{data.Price}}</h5></span>
+          <br>
+          <span><h5>Rating: {{data.Rating}} out of 5</h5></span>
+          <br>
+          <span><h5>Number of Reveiws: {{data.number_of_reviews}}</h5></span>
+          <br>
+          <span><h5>Average Rating : {{data.Avg_rev_rating}}</h5></span>
+      </div>
       <div class="analysis">  
           {% if data.Avg_rev_rating == 0.0 %}
-          <a href="{{data.Review_link}}"><button>well no one is perfect get over it!</button></a>
+          <br>
+          <a href="{{data.Review_link}}"><button>There is nothing to see here, Avert your eyes!</button></a>
           {% else %}
             <br>
             <span class="rat_chart">
@@ -37,23 +51,10 @@
           {% endif %}
       </div>
       <br>
-    </div>
-    <div class="details_holder">
-      <div class="products_details">    
-          <span><a href="{{data.Link}}" style="color: black"><h4>{{data.Product_name}}</h4></a></span>
-          <br>
-          <span> <h5>Price:{{data.Price}}</h5></span>
-          <br>
-          <span><h5>Rating: {{data.Rating}} out of 5</h5></span>
-          <br>
-          <span><h5>Number of Reveiws: {{data.number_of_reviews}}</h5></span>
-          <br>
-          <span><h5>Average Rating : {{data.Avg_rev_rating}}</h5></span>
-      </div>
-      <div>
-      <br>
-      <a href="{{data.Review_link}}"><button>Well The dev ran out of coffee so wait while he gets this page up!</button></a>
-      <br>
+      <div class="rev_button">
+        <br>
+        <a href="{{data.Review_link}}"><button>The two brain cells in the dev's brain is working overtime to put something else here, please wait!</button></a>
+        <br>
       </div>
     </div>
     <div>
@@ -83,7 +84,7 @@
         'rgba(0, 0, 0, .4)',
         'rgba(0, 0, 0, .4)',
       ],
-      borderWidth: 1
+      borderWidth: 2
       }]
       },
     options: {
@@ -104,8 +105,8 @@
                     data: tone_list,
                     backgroundColor: [
                         '#3c8dbc',
-                        '#f56954',
-                        '#f39c12',
+                        '#056608',
+                        '#850101',
                     ],
                 }],
                 labels: [
@@ -139,6 +140,9 @@
       justify-content:center;
       background-color: #eeeeee9e;
     }
+    .product_link{
+      color: black;
+    }
   }
   /* Dark mode */
   @media (prefers-color-scheme: dark) {
@@ -147,7 +151,10 @@
       flex-direction:row;
       justify-content:center;
       color:white;
-      background-color: #3333339e;
+      background-color: #333333be;
+    }
+    .product_link{
+      color: white;
     }
   }
   .image_holder {
@@ -156,11 +163,11 @@
     justify-content:center;
     padding-left:5%;
     width: 35%;
-    margin: auto;
+    align-self: flex-start;
   }
   .analysis{
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
     justify-content:left;
     text-align:center;
   }
@@ -185,9 +192,72 @@
     align-self: stretch;
   }
   .Product_image{
-      align: center;
       height: 280px;
       width: 340px;
+  }
+  @media all and (max-width: 885px){
+    .main_div{
+      flex-direction:column;
+      justify-content:center;
+    }
+    .image_holder{
+      flex-direction:column;
+      width:100%;
+      padding-left:.5%;
+      margin: auto;
+      justify-content:center;
+    }
+    .image_div{
+      margin:auto;
+    }
+    .analysis{
+      margin:auto;
+     justify-content:center; 
+    }
+    .rat_chart{
+      height:35vw;
+      width:50vw;
+    }
+    .tone_chart{
+      height:50vw;
+      width:50vw;
+    }
+    .details_holder {
+      flex-direction:column;
+      padding-left:0%;
+      width: 100%;
+      text-align: left;
+    }
+    .products_details{
+      width:90%;
+      margin:auto;
+    }
+    .rev_button{
+      margin:auto;
+    }
+  }
+  @media all and (max-width: 500px){
+    .rat_chart{
+      height:55vw;
+      width:85vw;
+    }
+    .tone_chart{
+      height:65vw;
+      width:85vw;
+    }
+    .details_holder {
+      flex-direction:column;
+      padding-left:0%;
+      width: 100%;
+      text-align: left;
+    }
+  }
+  @media all and (max-width: 350px){
+   .Product_image{
+      align: center;
+      height: 230px;
+      width: 280px;
+  } 
   }
 </style>
 {% endblock %}
