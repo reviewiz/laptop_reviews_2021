@@ -10,14 +10,15 @@ def get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk):
     else:
         table=data
     del data
-    if brand!='Any':
-        table=table.loc[table['Brand']==brand]
     if sort=='Price_A':
         table=table.nsmallest(len(table),['Price'])
     elif sort=='Price_D':
         table=table.nlargest(len(table),['Price'])
     else:
         table=table.nlargest(len(table),[sort])
+    if len(brand)>1:
+      brand.remove('Any')
+      table=table.loc[table['Brand'].isin(brand)]
     if len(RAM)>1:
       RAM.remove('all')
       RAM=map(int,RAM)
@@ -58,7 +59,7 @@ def search(request):
     try:
         lb=int(request.POST['Price_range'].split(',')[0])
         ub=int(request.POST['Price_range'].split(',')[1])
-        brand=request.POST['Brand']
+        brand=dict(request.POST)['make']
         sort=request.POST['sort']
         Processor=dict(request.POST)['Processor']
         RAM=dict(request.POST)['RAM']

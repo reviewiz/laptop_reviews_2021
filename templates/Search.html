@@ -13,6 +13,8 @@
     <div class="form_holder">
     <br>
       <form action ='.' method='POST'>{% csrf_token %}
+      <ul>
+      <li>
         <label for="sort">Sort by :</label>
           <select name="sort" id="sort">
           <option value="number_of_reveiws">Number of Reveiws</option>
@@ -20,8 +22,8 @@
           <option value="Price_D">Price(Descending)</option>
           <option value="Rating">Rating</option>
         </select>
-        <br>
-        <br>
+      </li>
+      <li>
         <label for="price range">Price Range:</label>
           <select name="Price_range" id="Price_range">
           <option value="0,0">Any</option>
@@ -31,24 +33,28 @@
           <option value="60000,79999">60000-80000</option>
           <option value="80000,-1"> &#62; 80000</option>
         </select>
-        <br>
-        <br>
-        <label for="make">Brand:</label>
-        <select name="Brand" id="Brand">
-          <option value="Any">Any</option>
+      </li>
+      <li><button class ="Search" type = "submit">Search</button></li>
+      <li>
+      <label for="make">Brand:</label>
+        <div class="Checkbox_list">
+          <input name="make" type="hidden" value="Any"/>
           {% for i in Brand%}
-            <option value="{{i}}">{{i}}</option>
+            <input class="form-check-input" type="checkbox" name="make" value="{{i}}" id="{{i}}">
+            <label class="form-check-label" for="{{i}}">
+              {{i}}
+            </label>
+            <br>
           {%endfor%}
-        </select>
-        <button class ="Search" type = "submit">Search</button>
-        <br>
-        <br>
+        </div>
+      </li> 
+      <br>
+      <li>
         <label for="RAM">RAM:</label>
         <div class="Checkbox_list">
           <input name="RAM" type="hidden" value="all"/>
           {% for i in RAM%}
             {% if i == -1 %}
-
             {% else %}
             <input class="form-check-input" type="checkbox" name="RAM" value="{{i}}" id="{{i}}_RAM">
             <label class="form-check-label" for="{{i}}_RAM">
@@ -58,6 +64,8 @@
             <br>
           {%endfor%}
         </div>
+      </li>
+      <li>
         <label for="Processor">Processor:</label>
         <div class="Checkbox_list">
           <input name="Processor" type="hidden" value="all"/>
@@ -70,6 +78,8 @@
           {%endfor%}
           <br>
         </div>
+      </li>
+      <li>
         <label for="screen">Screen Size:</label>
         <div class="Checkbox_list">
           <input name="screen" type="hidden" value="all"/>
@@ -82,6 +92,8 @@
         {%endfor%}
         <br>
         </div>
+      </li>
+      <li>
         <label for="Hard_disk">Hard Disk Type:</label>
         <div class="Checkbox_list">
           <input name="Hard_disk" type="hidden" value="all"/>
@@ -97,8 +109,9 @@
           {% endif %}
         {%endfor%}
         </div>
-        <br>      
-      <br>
+      </li>
+      <li><button class ="Search" type = "submit">Search</button></li>
+    </ul>
       </form>
     <br>
     </div>
