@@ -4,7 +4,7 @@
   Advanced Search
 {% endblock %}
 {% block page_heading%}
-  Laptop Reveiws
+  Laptop Reviews
   <!--Page heading-->
 {% endblock %}
 {% block content %}
@@ -13,48 +13,56 @@
     <div class="form_holder">
     <br>
       <form action ='.' method='POST'>{% csrf_token %}
-      <ul>
-      <li>
+        <div>
         <label for="sort">Sort by :</label>
-          <select name="sort" id="sort">
-          <option value="number_of_reveiws">Number of Reveiws</option>
-          <option value="Price_A">Price(Ascending)</option>
-          <option value="Price_D">Price(Descending)</option>
-          <option value="Rating">Rating</option>
-        </select>
-      </li>
-      <li>
-        <label for="price range">Price Range:</label>
-          <select name="Price_range" id="Price_range">
-          <option value="0,0">Any</option>
-          <option value="1,29999">&#60; 30000</option>
-          <option value="30000,39999">30000- 40000</option>
-          <option value="40000,59999">40000-50000</option>
-          <option value="60000,79999">60000-80000</option>
-          <option value="80000,-1"> &#62; 80000</option>
-        </select>
-      </li>
-      <li><button class ="Search" type = "submit">Search</button></li>
-      <li>
-      <label for="make">Brand:</label>
-        <div class="Checkbox_list">
-          <input name="make" type="hidden" value="Any"/>
-          {% for i in Brand%}
-            <input class="form-check-input" type="checkbox" name="make" value="{{i}}" id="{{i}}">
-            <label class="form-check-label" for="{{i}}">
-              {{i}}
-            </label>
+            <select name="sort" id="sort">
+              <option value="number_of_reveiws">Number of Reviews</option>
+              <option value="Price_A">Price(Ascending)</option>
+              <option value="Price_D">Price(Descending)</option>
+              <option value="Rating">Rating</option>
+            </select>
+          <br>
+          <label for="Price_range">Price Range:</label>
+          <div class="Checkbox_list">
+            <input name="Price_range" type="hidden" value="0,0"/>
+            <input class="form-check-input" type="checkbox" name="Price_range" value="1,29999" id="1,29999">
+            <label class="form-check-label" for="1,29999">&#60; 30000</label>
             <br>
-          {%endfor%}
+            <input class="form-check-input" type="checkbox" name="Price_range" value="30000,39999" id="30000,39999">
+            <label class="form-check-label" for="30000,39999">30000 - 40000</label>
+            <br>
+            <input class="form-check-input" type="checkbox" name="Price_range" value="40000,59999" id="40000,59999">
+            <label class="form-check-label" for="40000,59999">40000 - 60000</label>
+            <br>
+            <input class="form-check-input" type="checkbox" name="Price_range" value="60000,79999" id="60000,79999">
+            <label class="form-check-label" for="60000,79999">60000 - 80000</label>
+            <br>
+            <input class="form-check-input" type="checkbox" name="Price_range" value="80000,-1" id="80000,-1">
+            <label class="form-check-label" for="80000,-1">&#62; 80000</label>
+          </div>
+        <br>
+        <button class ="Search" type = "submit">Search</button>
         </div>
-      </li> 
-      <br>
-      <li>
+        <div class="toggle_division" id ="toggle_div">
+          <br>
+          <label for="Brand">Brand:</label>
+          <div class="Checkbox_list">
+            <input name="Brand" type="hidden" value="Any"/>
+            {% for i in Brand%}
+              <input class="form-check-input" type="checkbox" name="Brand" value="{{i}}" id="{{i}}">
+              <label class="form-check-label" for="{{i}}">
+                {{i}}
+              </label>
+              <br>
+            {%endfor%}
+          </div>
+        <br>
         <label for="RAM">RAM:</label>
         <div class="Checkbox_list">
           <input name="RAM" type="hidden" value="all"/>
           {% for i in RAM%}
             {% if i == -1 %}
+
             {% else %}
             <input class="form-check-input" type="checkbox" name="RAM" value="{{i}}" id="{{i}}_RAM">
             <label class="form-check-label" for="{{i}}_RAM">
@@ -64,8 +72,6 @@
             <br>
           {%endfor%}
         </div>
-      </li>
-      <li>
         <label for="Processor">Processor:</label>
         <div class="Checkbox_list">
           <input name="Processor" type="hidden" value="all"/>
@@ -78,8 +84,6 @@
           {%endfor%}
           <br>
         </div>
-      </li>
-      <li>
         <label for="screen">Screen Size:</label>
         <div class="Checkbox_list">
           <input name="screen" type="hidden" value="all"/>
@@ -92,8 +96,6 @@
         {%endfor%}
         <br>
         </div>
-      </li>
-      <li>
         <label for="Hard_disk">Hard Disk Type:</label>
         <div class="Checkbox_list">
           <input name="Hard_disk" type="hidden" value="all"/>
@@ -109,15 +111,20 @@
           {% endif %}
         {%endfor%}
         </div>
-      </li>
-      <li><button class ="Search" type = "submit">Search</button></li>
-    </ul>
-      </form>
-    <br>
-    </div>
+        <br>      
+      <br>
+    <button class ="Search" type = "submit">Search</button>  
+    </div>      
+  </form>  
+  <br>
+  <button id ="toggle_button">
+    Load more
+  </button>
+  <br>
+  </div>
     <div class="search_display">
           <br>
-          <h2>{{query}}</h2>
+          <h2 class="message">{{query}}</h2>
         {% for i in data%}
         <br>
         <div class="product_details"> 
@@ -126,10 +133,13 @@
           </div>
           <br>
           <div class="name_holder">
-            <a href="/Product/?code={{i.Product_code}}" style="color: black">
-            <h4 class="details_holder">{{i.Product_name|truncatechars:33}}</h4></a>
-            <span> <h5 class="details_holder">Price : &#8377; {{i.Price}}</h5></span>
-            <span><h5 class="details_holder">Rating :{{i.Rating}} out of 5 ({{i.number_of_reveiws}})</h5></span>
+            <a class="product_link" href="./Product/?code={{i.Product_code}}">
+            <span class="details"><h4>{{i.Product_name|truncatechars:33}}</h4></span>
+            <br>
+            <span class="details"><h5>Price : &#8377; {{i.Price}}</h5></span>
+            <br>
+            <span class="details"><h5>Rating :{{i.Rating}}  ({{i.number_of_reveiws}})</h5></span>
+          </a>
             <br>
           </div>
           <br> 
@@ -163,152 +173,176 @@
 {% block style %}
   <style>
     @media (prefers-color-scheme: light) {
-    .main_div{
-      display:flex;
-      flex-direction:row;
-      color:black;
-      justify-content:center;
-      background-color: #eeeeee9e;
+      .main_div{
+        display:flex;
+        flex-direction:row;
+        color:black;
+        justify-content:center;
+        background-color: #eeeeee9e;
+      }
+      .form_holder {
+        display:flex;
+        padding-left:2%;
+        flex-direction:column;
+        width: 27%;
+        background-color: #C3C3C3ee;
+      }
+      .search_display{
+        padding-left:.5%;
+        width:70%;
+        background-color: #e1e1e1de;
+      }
+      .product_details {
+        display:flex;
+        flex-direction:row;
+        background-color: #C3C3C3ee;
+        padding-top:2%;
+        padding-bottom:2%;
+        padding-left:2%;
+      }
     }
-    .form_holder {
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      .main_div{
+        display:flex;
+        flex-direction:row;
+        justify-content:center;
+        color:white;
+        background-color: #3333339e;
+      }
+      .form_holder {
       display:flex;
-      padding-left:2%;
       flex-direction:column;
-      width: 27%;
-      background-color: #C3C3C3ee;
-    }
+      width: 25%;
+      background-color: #4c4c4c9e;
+      }
     .search_display{
-      padding-left:.5%;
+      padding-left:2%;
       width:70%;
-      background-color: #e1e1e1de;
-    }
+      }
     .product_details {
       display:flex;
       flex-direction:row;
-      background-color: #C3C3C3ee;
+      background-color: #4c4c4c9e;
       padding-top:2%;
       padding-bottom:2%;
       padding-left:2%;
+      
     }
-  }
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    .main_div{
-      display:flex;
-      flex-direction:row;
-      justify-content:center;
-      color:white;
-      background-color: #3333339e;
     }
-    .form_holder {
-    display:flex;
-    flex-direction:column;
-    width: 25%;
-    background-color: #4c4c4c9e;
-    }
-  .search_display{
-    padding-left:2%;
-    width:70%;
-    background-color: #4c4c4c9e;
-    }
-  .product_details {
-    display:flex;
-    flex-direction:row;
-  }
-  }
-  .image_holder {
-    color: white;
-    width: 40%;
-  }
-  .name_holder {
-    padding-left:10%;
-    width: 60%;
-    margin: auto;
-    text-align: left;
-  }
-  .Product_image{
-      height: 280px;
-      width: 340px;
-  }
-  .Checkbox_list{
-    padding-left:10%;
-    margin: auto;
-    text-align: left;
-  }
-  @media all and (max-width: 885px){
-    .main_div{
-      flex-direction:column;
-    }
-    .Product_image{
-      height: 230px;
-      width: 280px;
-    }
-    .form_holder {
-      display:flex;
-      padding-left:5%;
-      flex-direction:column;
-      margin:auto;
-      width: 97%;
-    }
-    .search_display{
-      padding-left:.5%;
-      width:97%;
-      margin:auto;
-    }
-    .product_details {
-      width:95%;
-      margin:auto;
-    }
-    .name_holder {
-      padding-left:5%;
-    }
-  }
-  @media all and (max-width: 500px){
-    .Product_image{
-      height: 230px;
-      width: 280px;
-    }
-    .main_div{
-      flex-direction:column;
-    }
-    .Product_image{
-      height: 230px;
-      width: 280px;
-    }
-    .form_holder {
-      display:flex;
-      padding-left:5%;
-      flex-direction:column;
-      margin:auto;
-      width: 97%;
-    }
-    .search_display{
-      padding-left:.5%;
-      width:97%;
-      margin:auto;
-    }
-    .product_details {
-      flex-direction:column;
-      width:95%;
-      margin:auto;
+    .message{
+      text-align: center;
     }
     .image_holder {
-      display:flex;
-      justify-content:center;
-      width:100%;
-      padding-top:5%;
-      padding-bottom:3%;
+      color: white;
+      width: 40%;
     }
     .name_holder {
-      padding-left:5%;
-      width:95%;
+      padding-left:10%;
+      width: 60%;
+      margin: auto;
+      text-align: left;
     }
-  }
-  @media all and (max-width: 330px){
     .Product_image{
-      height: 195px;
-      width: 235px;
+        height: 280px;
+        width: 340px;
     }
-  }
+    .Checkbox_list{
+      padding-left:10%;
+      margin: auto;
+      text-align: left;
+    }
+    .toggle_division{
+      display:none;
+    }
+    @media all and (max-width: 885px){
+      .main_div{
+        flex-direction:column;
+      }
+      .Product_image{
+        height: 230px;
+        width: 280px;
+      }
+      .form_holder {
+        display:flex;
+        padding-left:5%;
+        flex-direction:column;
+        margin:auto;
+        width: 97%;
+      }
+      .search_display{
+        padding-left:.5%;
+        width:97%;
+        margin:auto;
+      }
+      .product_details {
+        width:95%;
+        margin:auto;
+      }
+      .name_holder {
+        padding-left:5%;
+      }
+    }
+    @media all and (max-width: 500px){
+      .Product_image{
+        height: 230px;
+        width: 280px;
+      }
+      .main_div{
+        flex-direction:column;
+      }
+      .Product_image{
+        height: 230px;
+        width: 280px;
+      }
+      .form_holder {
+        display:flex;
+        padding-left:5%;
+        flex-direction:column;
+        margin:auto;
+        width: 97%;
+      }
+      .search_display{
+        padding-left:.5%;
+        width:97%;
+        margin:auto;
+      }
+      .product_details {
+        flex-direction:column;
+        width:95%;
+        margin:auto;
+      }
+      .image_holder {
+        display:flex;
+        justify-content:center;
+        width:100%;
+        padding-top:5%;
+        padding-bottom:3%;
+      }
+      .name_holder {
+        padding-left:5%;
+        width:95%;
+      }
+    }
+    @media all and (max-width: 330px){
+      .Product_image{
+        height: 195px;
+        width: 235px;
+      }
+    }
   </style>
+  <script>
+      const targetDiv=document.getElementById("toggle_div");
+      const btn=document.getElementById("toggle_button");
+      btn.onclick = function (){
+      if(targetDiv.style.display !== "block" ){
+          targetDiv.style.display="block";
+          btn.innerHTML="Load Less"
+      } else{
+          targetDiv.style.display="none";
+          btn.innerHTML="Load More"
+
+      } 
+        };
+  </script>
 {% endblock %}

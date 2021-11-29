@@ -32,6 +32,7 @@
           <br>
           <span><h5>Average Rating : {{data.Avg_rev_rating}}</h5></span>
       </div>
+      <br>
       <div class="analysis">  
           {% if data.Avg_rev_rating == 0.0 %}
           <br>
@@ -250,6 +251,12 @@
       padding-left:0%;
       width: 100%;
       text-align: left;
+    }
+    .analysis{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:center;
     }
   }
   @media all and (max-width: 350px){

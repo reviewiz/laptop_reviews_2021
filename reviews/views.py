@@ -59,7 +59,7 @@ def search(request):
     try:
         lb=int(request.POST['Price_range'].split(',')[0])
         ub=int(request.POST['Price_range'].split(',')[1])
-        brand=dict(request.POST)['make']
+        brand=dict(request.POST)['Brand']
         sort=request.POST['sort']
         Processor=dict(request.POST)['Processor']
         RAM=dict(request.POST)['RAM']
@@ -68,7 +68,7 @@ def search(request):
         table=get_advanced_df(data,brand,ub,lb,sort,Processor,RAM,screen,Hard_disk)
         del data
         if brand=='Any' and sort=='number_of_reveiws' and lb==0 and ub==0:
-            message="Top 5 most reveiwed laptops"
+            message="Top 5 most reviewed laptops"
         
         if table.shape[0]!=0:
             if table.shape[0]==1:
@@ -79,7 +79,7 @@ def search(request):
             message="Believe me! I looked everywhere and all I found was this. :( "
     except:
         table=data.nlargest(5, ['number_of_reveiws'])
-        message="Top 5 most reveiwed products"
+        message="Top 5 most reviewed products"
     for i in range(table.shape[0]):
         all_data.append(dict(table.iloc[i]))
     context={'data':all_data,'Brand':Brand_list,'RAM':RAM_list,'Processor':Processor_list,'screen':screen_list,'Hard_disk':HD_list,'query':message}
